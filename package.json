@@ -1,0 +1,27 @@
+{
+  "name": "animated-parakeet",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/metalsmith-start",
+    "example": "node example/run_example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coder-on-deck/animated-parakeet.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coder-on-deck/animated-parakeet/issues"
+  },
+  "homepage": "https://github.com/coder-on-deck/animated-parakeet#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "js-yaml": "^3.5.5",
+    "lodash": "^4.7.0",
+    "metalsmith": "^2.1.0",
+    "metalsmith-collections": "^0.7.0",
+    "metalsmith-paths": "^2.1.2"
+  }
+}
