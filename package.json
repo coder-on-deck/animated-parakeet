@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/metalsmith-start",
-    "example": "node example/run_example.js"
+    "start": "metalsmith-start",
+    "postinstall" : "webdriver-manager update",
+    "example": "rm -rf build && node metalsmith.js --sourceDir ./example"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,9 @@
     "lodash": "^4.7.0",
     "metalsmith": "^2.1.0",
     "metalsmith-collections": "^0.7.0",
-    "metalsmith-paths": "^2.1.2"
+    "metalsmith-paths": "^2.1.2",
+    "minimist": "^1.2.0",
+    "request" : "*",
+    "webdriver-manager" : "*"
   }
 }

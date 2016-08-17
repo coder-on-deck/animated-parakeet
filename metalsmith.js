@@ -9,7 +9,8 @@ var handlebars = require('handlebars');
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
-
+var argv = require('minimist')(process.argv.slice(2));
+var sourceDir = argv.sourceDir || process.env.SOURCE_DIR 
 var paths = require('metalsmith-paths');
 
 // adds support for template object with fallback to base
@@ -35,9 +36,9 @@ function isPartial(base){
 }
 
 // register partials from SOURCE_DIR
-var files = fs.readdirSync(process.env.SOURCE_DIR);
+var files = fs.readdirSync(sourceDir);
 _.each( _.filter(files, isPartial), (f)=>{
-     handlebars.registerPartial(f.split('.')[0], fs.readFileSync(path.join(process.env.SOURCE_DIR, f)).toString() )
+     handlebars.registerPartial(f.split('.')[0], fs.readFileSync(path.join(sourceDir, f)).toString() )
 });
 
 
@@ -88,7 +89,7 @@ handlebars.registerHelper('keepindentation', function(options) {
 });
 
 new Metalsmith('.')
-    .source(process.env.SOURCE_DIR)
+    .source(sourceDir)
     .use(collections({
         'configurations' : '*.yaml',
         'templates' : '*.hbs'
@@ -117,11 +118,11 @@ new Metalsmith('.')
                 console.log('CONFIGURATION ' + configuration + ' IS MISSING BUT REQUIRED BY TEMPLATE ' + template.path.base );
             }
             template.configuration = metalsmith.configurations[configuration];
-            _.each(template.configuration.object.client.functions, function(f){
+            // _.each(template.configuration.object.client.functions, function(f){
                 //if ( f.name === 'publish_archive'){
                     //console.log(f.doc.comment);
                 //}
-            })
+            // })
         });
     })
     .use( (pages, metalsmith )=>{ // apply configuration on each template
@@ -142,5 +143,5 @@ new Metalsmith('.')
     })
     .build( function(e){ if ( e ) { console.log(e); }  } );
 
-console.log('building : ' + process.env.SOURCE_DIR);
+console.log('building : ' + sourceDir);
 

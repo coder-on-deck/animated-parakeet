@@ -1,0 +1,21 @@
+---
+configuration: json-wire.yaml 
+---
+
+var request = require('request');
+{{#each api.requests}}
+  
+exports.{{this.key}} = function(baseUrl, {{#each this.params}}{{this.name}},{{/each}}callback){
+  request({
+    method: '{{this.method}}', 
+    uri : baseUrl + '{{this.uri}}'{{#if this.params}},{{/if}}
+    {{#if this.params}}
+    body: JSON.stringify({
+       {{#each this.params}}
+         {{this.name}}:{{this.name}}{{#unless @last}}, {{/unless}}
+       {{/each}}
+    })  
+    {{/if}}
+  }, callback)
+};
+{{/each}}

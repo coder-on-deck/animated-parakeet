@@ -1,0 +1,22 @@
+---
+configuration: json-wire.yaml
+---
+
+import urllib
+import urllib2
+
+class JsonWireClient: 
+    
+  def __init__(self, baseUrl):
+     self.baseUrl = baseUrl
+
+{{#each api.requests}}
+  
+  def {{this.key}}(self{{#if this.params}},{{/if}}{{#each this.params}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}}):
+    {{#if this.params}}
+    data=dict({{#each this.params}}{{this.name}}={{this.name}}{{#unless @last}},{{/unless}}{{/each}})
+    {{/if}}
+    print (self.baseUrl + '{{this.uri}}')
+    return urllib2.urlopen(url=self.baseUrl + '{{this.uri}}'{{#if this.params}},data=data{{/if}}).read()
+  
+{{/each}}

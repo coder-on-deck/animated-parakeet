@@ -1,0 +1,39 @@
+api:
+ spec: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#status
+ requests: 
+  - method: GET
+    key: getStatus
+    uri: /status
+    response: 
+     - name: build
+       type: object
+       fields: 
+        - name: version
+          type: string
+        - name: revision
+          type: string
+        - name: time
+          type: string
+     - name: os
+       type: object
+       fields: 
+       - name: arch
+         type: string
+       - name: name
+         type: string
+       - name: revision
+         type: string
+  - method: POST
+    uri: /session
+    key: postSession
+    params: 
+    - name: desiredCapabilities
+      type: dict
+    - name: requiredCapabilities
+      type: dict
+    response: 
+     - name: capabilities
+       type: dict
+    
+
+ 
