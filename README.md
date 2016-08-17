@@ -11,7 +11,7 @@ Animated Parakee
 The configuration file can contain whatever data you want it to be as long as it's a valid yaml/json file     
 For example, the json wire protocol has the following configuration file named `json-wire.yaml` 
 
-```
+```yaml
 api:
  spec: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#status
  requests: 
@@ -84,7 +84,7 @@ exports.{{this.key}} = function(baseUrl, {{#each this.params}}{{this.name}},{{/e
 
 This is the python template
 
-```
+```hbs
 ---
 configuration: json-wire.yaml
 ---
